@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="OnionArc.API/OnionArc.API.csproj" />
+  <Project Path="OnionArc.Application/OnionArc.Application.csproj" />
+  <Project Path="OnionArc.Domain/OnionArc.Domain.csproj" />
+  <Project Path="OnionArc.Infrastructure/OnionArc.Infrastructure.csproj" />
+  <Project Path="OnionArc.Persistence/OnionArc.Persistence.csproj" />
+</Solution>
