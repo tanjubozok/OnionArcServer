@@ -1,8 +1,11 @@
+using OnionArc.Application.Extensions;
 using OnionArc.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddApplicationServices();
+
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
