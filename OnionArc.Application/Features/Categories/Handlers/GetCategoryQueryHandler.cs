@@ -22,7 +22,13 @@ public class GetCategoryQueryHandler : IRequestHandler<GetCategoryQuery, BaseRes
     public async Task<BaseResult<List<GetCategoryQueryResult>>> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
         var categories = await _repository.GetAllAsync();
+        if (categories == null || categories.Count == 0)
+        {
+            return BaseResult<List<GetCategoryQueryResult>>.Failure(ErrorType.NotFound, "Kategori bulunamadı");
+        }
+
         var result = _mapper.Map<List<GetCategoryQueryResult>>(categories);
+
         return BaseResult<List<GetCategoryQueryResult>>.Success(result);
     }
 }
