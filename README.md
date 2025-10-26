@@ -2,19 +2,6 @@
 
 **OnionArcServer**, Clean Architecture ve Onion Architecture prensiplerini temel alan güçlü bir .NET sunucu uygulama çatısıdır. Amaç, kodun sürdürülebilirliğini, test edilebilirliğini ve genişletilebilirliğini artırmaktır.
 
-## İçindekiler
-- [Neden OnionArcServer?](#neden-onionarcserver)
-- [Mimari Genel Bakış](#mimari-genel-bakış)
-- [Başlarken](#başlarken)
-- [Proje Yapısı](#proje-yapısı)
-- [Gereksinimler](#gereksinimler)
-- [Kurulum ve Çalıştırma](#kurulum-ve-çalıştırma)
-- [Kullanım](#kullanım)
-- [Katkıda Bulunma](#katkıda-bulunma)
-- [Lisans](#lisans)
-
----
-
 ## Neden OnionArcServer?
 
 Modern backend geliştirmede okunabilirlik, test edilebilirlik ve esneklik çok önemlidir. **OnionArcServer**, bu ihtiyaçları karşılamak için tasarlanmıştır:
