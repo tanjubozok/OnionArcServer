@@ -1,3 +1,4 @@
+using OnionArc.API.Extentions;
 using OnionArc.Application.Extensions;
 using OnionArc.Persistence.Extensions;
 
@@ -19,4 +20,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+app.MapGroup("/api")
+   .RegisterEndpoints();
+
 app.Run();
