@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using OnionArc.API.Extentions;
 using OnionArc.Application.Features.Categories.Queries;
 
 namespace OnionArc.API.Endpoints;
@@ -12,8 +13,7 @@ public static class CategoryEndpoints
         categories.MapGet("", async (IMediator mediator) =>
         {
             var response = await mediator.Send(new GetCategoryQuery());
-
-            return response.IsSuccess ? Results.Ok(response.Data) : Results.BadRequest(response.Data);
+            return response.ToHttpResult();
         });
     }
 }
