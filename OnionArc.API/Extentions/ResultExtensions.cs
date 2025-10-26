@@ -1,27 +1,23 @@
-﻿using OnionArc.Application.Base;
+﻿using OnionArc.Application.Results;
 
 namespace OnionArc.API.Extentions;
 
 public static class ResultExtensions
 {
-    public static IResult ToHttpResult<T>(this BaseResult<T> result)
+    public static IResult ToHttpResult<T>(this TResult<T> r)
     {
-        if (result.IsSuccess)
-            return Results.Ok(result.Data);
-
-        var firstError = result.Errors!.First();
-        return firstError.Type switch
+        if (r.IsSuccess) return Results.Ok(r.Data);
+        var e = r.Errors!.First();
+        return e.Type switch
         {
-            ErrorType.NotFound => Results.NotFound(result),
-            ErrorType.Validation => Results.BadRequest(result),
-            ErrorType.Conflict => Results.Conflict(result),
+            ErrorType.Validation => Results.BadRequest(r),
             ErrorType.Unauthorized => Results.Unauthorized(),
             ErrorType.Forbidden => Results.Forbid(),
-            ErrorType.InternalServerError => Results.Problem(
-                statusCode: 500,
-                detail: firstError.ErrorMessage
-            ),
-            _ => Results.BadRequest(result)
+            ErrorType.NotFound => Results.NotFound(r),
+            ErrorType.Conflict => Results.Conflict(r),
+            ErrorType.InternalServerError or ErrorType.Failure or ErrorType.Exception
+                => Results.Problem(statusCode: 500, detail: e.ErrorMessage),
+            _ => Results.BadRequest(r)
         };
     }
 }

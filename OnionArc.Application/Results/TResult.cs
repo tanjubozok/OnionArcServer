@@ -1,6 +1,6 @@
-﻿namespace OnionArc.Application.Base;
+﻿namespace OnionArc.Application.Results;
 
-public class BaseResult<T>
+public class TResult<T>
 {
     public T? Data { get; init; }
     public List<Error>? Errors { get; init; }
@@ -8,40 +8,39 @@ public class BaseResult<T>
     public bool IsSuccess => Errors == null || Errors.Count == 0;
     public bool IsFailure => !IsSuccess;
 
-    public static BaseResult<T> Success(T data)
+    public static TResult<T> Success(T data)
         => new() { Data = data };
 
-    public static BaseResult<T> Failure(List<Error> errors)
+    public static TResult<T> Failure(List<Error> errors)
         => new() { Errors = errors };
 
-    public static BaseResult<T> Failure(ErrorType errorType, string errorMessage)
+    public static TResult<T> Failure(ErrorType errorType, string errorMessage)
     {
-        return new BaseResult<T>
+        return new TResult<T>
         {
-            Errors =
-            [
+            Errors = new List<Error>
+            {
                 new Error
                 {
                     Type = errorType,
                     ErrorMessage = errorMessage
                 }
-            ]
+            }
         };
     }
 
-    public static BaseResult<T> Failure(ErrorType errorType, string propertyName, string errorMessage)
+    public static TResult<T> Exception(string errorMessage)
     {
-        return new BaseResult<T>
+        return new TResult<T>
         {
-            Errors =
-            [
+            Errors = new List<Error>
+            {
                 new Error
                 {
-                    Type = errorType,
-                    PropertyName = propertyName,
+                    Type = ErrorType.Exception,
                     ErrorMessage = errorMessage,
                 }
-            ]
+            }
         };
     }
 }
@@ -60,5 +59,7 @@ public enum ErrorType
     Conflict = 2,
     Unauthorized = 3,
     Forbidden = 4,
-    InternalServerError = 5
+    InternalServerError = 5,
+    Failure = 6,
+    Exception = 7
 }

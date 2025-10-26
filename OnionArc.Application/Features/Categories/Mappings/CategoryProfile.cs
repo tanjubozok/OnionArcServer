@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OnionArc.Application.Features.Categories.Commands;
 using OnionArc.Application.Features.Categories.Results;
 using OnionArc.Domain.Entities;
 
@@ -9,5 +10,6 @@ public class CategoryProfile : Profile
     public CategoryProfile()
     {
         CreateMap<Category, GetCategoryQueryResult>();
+        CreateMap<Category, CreateCategoryCommand>().ReverseMap();
     }
 }
